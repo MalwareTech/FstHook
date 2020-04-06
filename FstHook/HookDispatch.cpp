@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "HookDispatch.h"
 
-LPVOID DispatchTable = NULL;
+LPVOID *DispatchTable = NULL;
 DWORD DispatchTableEnd = 0;
 
 /*

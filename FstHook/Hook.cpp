@@ -4,7 +4,7 @@
 #include "Hook.h"
 #include "HookDispatch.h"
 
-extern LPVOID DispatchTable;
+extern LPVOID *DispatchTable;
 extern DWORD DispatchTableEnd;
 
 /*
@@ -12,9 +12,9 @@ extern DWORD DispatchTableEnd;
 */
 BOOL AddProxyProcedure(CHAR *FunctionName, DWORD NumParameters, LPVOID ProxyAddress)
 {
-	LPVOID FunctionAddress;
-	LPVOID *LocalDispatchTable;
-	DWORD ordinal, TableSize;
+	DWORD ordinal = 0, TableSize = 0;
+	LPVOID FunctionAddress = NULL;
+	LPVOID *LocalDispatchTable = DispatchTable;
 
 	FunctionAddress = GetProcAddress(GetModuleHandleA("ntdll.dll"), FunctionName);
 	if(!FunctionAddress)
